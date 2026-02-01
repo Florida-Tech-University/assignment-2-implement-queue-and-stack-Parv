@@ -2,8 +2,8 @@ import java.util.Objects;
 
 public class ArrayQueue<E> implements QueueADT<E> {
     private final E[] data;
-    private int front = 0;  // index of the front element
-    private int size = 0;   // number of elements in the queue
+    private int front = 0;  
+    private int size = 0;   
 
     @SuppressWarnings("unchecked")
     public ArrayQueue(int capacity) {
