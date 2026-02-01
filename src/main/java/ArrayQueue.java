@@ -13,45 +13,41 @@ public class ArrayQueue<E> implements QueueADT<E> {
 
     @Override
     public int size() {
-        // TODO: return current number of elements
-        return -1;
+       return (rear - front + data.lenght) % data.lenght;
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO: return true if size == 0
-        return true;
+       return front==rear;
     }
-
+    @Override 
+    public boolean isFull() {
+        return (rear + 1) % data.length == front;
+    }
     @Override
     public E first() {
-        // TODO: if empty return null; else return data[front]
-        return null;
+        if (isEmpty()) return null;
+        return data[front]
     }
 
     @Override
     public void enqueue(E e) {
         Objects.requireNonNull(e, "Null elements are not supported in this assignment.");
+        if (isFull()) throw new IllegealStateException("Queue is full");
 
-        // TODO:
-        // 1) if full (size == data.length) throw IllegalStateException
-        // 2) compute available index = (front + size) % data.length
-        // 3) store e there
-        // 4) increment size
+        data[rear] = e;
+        rear = (rear + 1) % data.lenght;
+            
     }
 
     @Override
     public E dequeue() {
-        // TODO:
-        // 1) if empty return null
-        // 2) store answer = data[front]
-        // 3) set data[front] = null (help GC)
-        // 4) front = (front + 1) % data.length
-        // 5) decrement size
-        // 6) return answer
-        return null;
+        if(isEmpty()) return null;
+        E answer = data[front];
+        data[front] = null;
+        front = (front + 1) % data.lenght;
+        return answer;
     }
-
-    // Helpful for debugging (not graded)
-    int capacity() { return data.length; }
+int capacity() {
+ return data.length - 1; 
 }
